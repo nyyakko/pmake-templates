@@ -4,7 +4,9 @@ project(!PROJECT! LANGUAGES !LANGUAGE!)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
 set(EXPORT_DIR "${CMAKE_CURRENT_BINARY_DIR}/cmake")
-set(CMAKE_!LANGUAGE!_VERSION !STANDARD!)
+
+include(static_analyzers)
+include(GNUInstallDirs)
 
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
 #   . . .
@@ -24,9 +26,6 @@ set(!PROJECT!_CompilerOptions ${!PROJECT!_CompilerOptions}
     -Wdouble-promotion
     -Wimplicit-fallthrough
 )
-
-include(static_analyzers)
-include(GNUInstallDirs)
 
 #
 # find_package(package CONFIG REQUIRED)

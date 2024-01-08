@@ -3,6 +3,8 @@ include(static_analyzers/cppcheck)
 
 function(enable_static_analyzers target ENABLED)
 
+    set(CMAKE_C_VERSION !STANDARD!)
+
     find_program(CPPCHECK cppcheck)
     find_program(CLANGTIDY clang-tidy)
 
