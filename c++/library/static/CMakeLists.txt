@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(!PROJECT! LANGUAGES !LANGUAGE!)
+project(!PROJECT! LANGUAGES CXX)
 
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 set(CMAKE_MODULE_PATH "${PROJECT_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
@@ -36,12 +36,10 @@ set(!PROJECT!_CompilerOptions ${!PROJECT!_CompilerOptions}
     -Wimplicit-fallthrough
 )
 
-#
 # find_package(package CONFIG REQUIRED)
-# ...
+# . . .
 #
 # set(arser_ExternalLibraries package ...)
-#
 
 add_subdirectory(!PROJECT!)
 
