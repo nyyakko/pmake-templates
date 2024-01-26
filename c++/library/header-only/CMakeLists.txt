@@ -7,11 +7,12 @@ set(EXPORT_DIR "${CMAKE_CURRENT_BINARY_DIR}/cmake")
 set(CMAKE_TOOLCHAIN_FILE $ENV{CMAKE_TOOLCHAIN_FILE})
 
 include(static_analyzers)
-include(toolchain_vcpkg)
-include(remote_clone)
+include(enable_vcpkg)
+include(enable_tests)
 include(GNUInstallDirs)
 
 enable_vcpkg()
+enable_tests()
 
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
 #   . . .
@@ -41,26 +42,3 @@ set(!PROJECT!_CompilerOptions ${!PROJECT!_CompilerOptions}
 # set(arser_ExternalLibraries package ...)
 
 add_subdirectory(!PROJECT!)
-
-if (NOT !PROJECT!_DISABLE_TESTS)
-    message(STATUS "[${PROJECT_NAME}] Project will be building the test suit.")
-
-    if (NOT ${CMAKE_HOST_SYSTEM_NAME} MATCHES "Windows")
-        message(STATUS "[${PROJECT_NAME}] Running on ${CMAKE_HOST_SYSTEM_NAME}, sanitizers for tests are enabled.")
-        set(!PROJECT!_TestsLinkerOptions ${!PROJECT!_TestsLinkerOptions} -fsanitize=undefined,leak,address)
-    else()
-        message(STATUS "[${PROJECT_NAME}] Running on ${CMAKE_HOST_SYSTEM_NAME}, sanitizers for tests are disabled.")
-    endif()
-
-    set(!PROJECT!_TestsCompilerOptions ${!PROJECT!_TestsCompilerOptions} ${!PROJECT!_CompilerOptions})
-
-    include(GoogleTest)
-    find_package(GTest CONFIG REQUIRED)
-
-    enable_testing()
-    add_subdirectory(tests)
-else()
-    message(STATUS "[${PROJECT_NAME}] Project will not be building the test suit.")
-endif()
-
-enable_testing()

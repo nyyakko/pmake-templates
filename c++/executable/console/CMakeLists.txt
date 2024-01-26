@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 set(CMAKE_TOOLCHAIN_FILE $ENV{CMAKE_TOOLCHAIN_FILE})
 
 include(static_analyzers)
-include(toolchain_vcpkg)
+include(enable_vcpkg)
 include(remote_clone)
 
 enable_vcpkg()
