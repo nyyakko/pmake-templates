@@ -7,6 +7,9 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/${CMAKE_BUILD_TYPE})
 
 include(static_analyzers)
 
+option(ENABLE_CLANGTIDY "" TRUE)
+option(ENABLE_CPPCHECK "" TRUE)
+
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
 #   . . .
 # )

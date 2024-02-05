@@ -12,8 +12,15 @@ include(enable_vcpkg)
 include(enable_tests)
 include(GNUInstallDirs)
 
+option(ENABLE_CLANGTIDY "" TRUE)
+option(ENABLE_CPPCHECK "" TRUE)
+option(ENABLE_TESTING "" TRUE)
+
+if (ENABLE_TESTING)
+    enable_tests()
+endif()
+
 enable_vcpkg()
-enable_tests()
 
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
 #   . . .

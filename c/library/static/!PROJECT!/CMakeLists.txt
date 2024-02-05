@@ -3,13 +3,19 @@ add_subdirectory(include/${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} STATIC ${!PROJECT!_SourceFiles})
 
-enable_static_analyzers(${PROJECT_NAME} ON)
+if (ENABLE_CLANGTIDY)
+    enable_clang_tidy()
+endif()
+
+if (ENABLE_CPPCHECK)
+    enable_cppcheck()
+endif()
 
 target_include_directories(${PROJECT_NAME}
     PRIVATE "${CMAKE_CURRENT_SOURCE_DIR}/include/${PROJECT_NAME}"
     INTERFACE
-	    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-	    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 target_compile_features(${PROJECT_NAME} PRIVATE c_std_!STANDARD!)

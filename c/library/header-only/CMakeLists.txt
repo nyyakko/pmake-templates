@@ -9,7 +9,13 @@ include(static_analyzers)
 include(enable_tests)
 include(GNUInstallDirs)
 
-enable_tests()
+option(ENABLE_CLANGTIDY "" TRUE)
+option(ENABLE_CPPCHECK "" TRUE)
+option(ENABLE_TESTING "" TRUE)
+
+if (ENABLE_TESTING)
+    enable_tests()
+endif()
 
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
 #   . . .

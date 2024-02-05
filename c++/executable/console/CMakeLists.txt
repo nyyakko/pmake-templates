@@ -10,6 +10,9 @@ include(static_analyzers)
 include(enable_vcpkg)
 include(remote_clone)
 
+option(ENABLE_CLANGTIDY "" TRUE)
+option(ENABLE_CPPCHECK "" TRUE)
+
 enable_vcpkg()
 
 # set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}

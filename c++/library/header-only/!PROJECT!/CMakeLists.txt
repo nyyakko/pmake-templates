@@ -2,12 +2,18 @@ add_subdirectory(include/${PROJECT_NAME})
 
 add_library(${PROJECT_NAME} INTERFACE ${!PROJECT!_HeaderFiles})
 
-enable_static_analyzers(${PROJECT_NAME} ON)
+if (ENABLE_CLANGTIDY)
+    enable_clang_tidy()
+endif()
+
+if (ENABLE_CPPCHECK)
+    enable_cppcheck()
+endif()
 
 target_include_directories(${PROJECT_NAME}
     INTERFACE
-	    "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
-	    "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
+        "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/include>"
+        "$<INSTALL_INTERFACE:${CMAKE_INSTALL_INCLUDEDIR}>"
 )
 
 set_target_properties(${PROJECT_NAME} PROPERTIES VERIFY_INTERFACE_HEADER_SETS TRUE)
