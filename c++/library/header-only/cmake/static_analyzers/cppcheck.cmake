@@ -1,6 +1,6 @@
 function(enable_cppcheck)
 
-    find_program(CPPCHECK cppcheck)
+    find_program(CLANGTIDY clang-tidy)
 
     if (NOT CPPCHECK)
         message(WARNING "[${PROJECT_NAME}] Couldn't find a valid ``cppcheck`` installation.")
@@ -34,9 +34,5 @@ function(enable_cppcheck)
         set(CMAKE_CXX_CPPCHECK ${CMAKE_CXX_CPPCHECK} --platform=win64)
     endif()
 
-    if(NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
-        set(CMAKE_CXX_CPPCHECK ${CMAKE_CXX_CPPCHECK} CACHE INTERNAL --std=c++${CMAKE_CXX_STANDARD})
-    elseif(NOT "${CMAKE_C_STANDARD}" STREQUAL "")
-        set(CMAKE_C_CPPCHECK ${CMAKE_C_CPPCHECK} CACHE INTERNAL --std=c${CMAKE_C_STANDARD})
-    endif()
+    set(CMAKE_CXX_CPPCHECK ${CMAKE_CXX_CPPCHECK} CACHE INTERNAL --std=c++!STANDARD!)
 endfunction()

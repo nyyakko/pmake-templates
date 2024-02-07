@@ -1,13 +1,13 @@
 function(enable_clang_tidy)
 
-    find_program(CPPCHECK clang-tidy)
+    find_program(CLANGTIDY clang-tidy)
 
     if (NOT CLANGTIDY)
         message(WARNING "[${PROJECT_NAME}] Couldn't find a valid ``clang-tidy`` installation.")
         return()
     endif()
 
-    if(NOT CMAKE_CXX_COMPILER_ID MATCHES ".*Clang")
+    if(NOT CMAKE_C_COMPILER_ID MATCHES ".*Clang")
         get_target_property(TARGET_PCH ${PROJECT_NAME} INTERFACE_PRECOMPILE_HEADERS)
 
         if("${TARGET_PCH}" STREQUAL "TARGET_PCH-NOTFOUND")
@@ -27,19 +27,11 @@ function(enable_clang_tidy)
         --use-color
         --p)
 
-    if(NOT "${CMAKE_CXX_STANDARD}" STREQUAL "")
-        if("${CLANG_TIDY_OPTIONS_DRIVER_MODE}" STREQUAL "cl")
-            set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=/std:c++${CMAKE_CXX_STANDARD})
-        else()
-            set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=-std=c++${CMAKE_CXX_STANDARD})
-        endif()
-    elseif(NOT "${CMAKE_C_STANDARD}" STREQUAL "")
-        if("${CLANG_TIDY_OPTIONS_DRIVER_MODE}" STREQUAL "cl")
-            set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=/std:c${CMAKE_C_STANDARD})
-        else()
-            set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=-std=c${CMAKE_C_STANDARD})
-        endif()
+    if("${CLANG_TIDY_OPTIONS_DRIVER_MODE}" STREQUAL "cl")
+        set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=/std:c!STANDARD!)
+    else()
+        set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=-std=c!STANDARD!)
     endif()
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
+    set_target_properties(${PROJECT_NAME} PROPERTIES CMAKE_C_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
 endfunction()
