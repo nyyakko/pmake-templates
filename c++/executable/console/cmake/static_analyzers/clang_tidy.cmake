@@ -33,5 +33,5 @@ function(enable_clang_tidy)
         set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=-std=c++!STANDARD!)
     endif()
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
+    set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
 endfunction()

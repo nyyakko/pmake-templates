@@ -1,6 +1,6 @@
 function(enable_clang_tidy)
 
-    find_program(CPPCHECK clang-tidy)
+    find_program(CLANGTIDY clang-tidy)
 
     if (NOT CLANGTIDY)
         message(WARNING "[${PROJECT_NAME}] Couldn't find a valid ``clang-tidy`` installation.")
@@ -33,5 +33,5 @@ function(enable_clang_tidy)
         set(CLANG_TIDY_OPTIONS ${CLANG_TIDY_OPTIONS} -extra-arg=-std=c++!STANDARD!)
     endif()
 
-    set_target_properties(${PROJECT_NAME} PROPERTIES CMAKE_CXX_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
+    set_target_properties(${PROJECT_NAME} PROPERTIES CXX_CLANG_TIDY "${CLANG_TIDY_OPTIONS}")
 endfunction()
