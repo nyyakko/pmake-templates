@@ -17,10 +17,6 @@ if (ENABLE_TESTING)
     enable_tests()
 endif()
 
-# set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions}
-#   . . .
-# )
-
 set(!PROJECT!_CompilerOptions ${!PROJECT!_CompilerOptions}
     -Werror
     -Wall
@@ -36,9 +32,12 @@ set(!PROJECT!_CompilerOptions ${!PROJECT!_CompilerOptions}
     -Wimplicit-fallthrough
 )
 
-# find_package(package CONFIG REQUIRED)
-# . . .
+# set(!PROJECT!_LinkerOptions ${!PROJECT!_LinkerOptions})
+
+# find_package(package1 CONFIG REQUIRED)
+# find_package(package2 CONFIG REQUIRED)
+# ...
 #
-# set(arser_ExternalLibraries package ...)
+# set(!PROJECT!_ExternalLibraries package1 package2 ...)
 
 add_subdirectory(!PROJECT!)
