@@ -1,7 +1,7 @@
 {
     "wildcards": {
-        "project_name": "!PROJECT!",
-        "project_language": "!LANGUAGE!",
-        "project_standard": "!STANDARD!"
+        "name": "!PROJECT!",
+        "language": "!LANGUAGE!",
+        "standard": "!STANDARD!"
     }
 }
